@@ -6,3 +6,4 @@ This exercises involved generating a string based on user selection to create ra
 [webpage screenshot][!./assets/images/page.png]
 
 ## Link
+[Click me][https://abstynent.github.io/password-generator]
