@@ -25,7 +25,7 @@ var pwdParameters = {
   };
 
 // Run the function to select password lenght until number within range is given or canceled by user
-function setPasswordLength() {
+function getPasswordLength() {
     pwdParameters.len = 0;
     while(pwdParameters.len < 8 || pwdParameters.len > 128) {
       pwdParameters.len = parseInt(prompt(promptText.pwdLen));
@@ -33,7 +33,24 @@ function setPasswordLength() {
       };
     return true;
   };
-    
+
+  // Ask user to select which type of characters to include in the password
+// Validate if at least one type was choosen, if not run the function again
+function getPasswordParameters() {
+    if(confirm(promptText.lowecase)) pwdParameters.lowercase = true; else pwdParameters.lowercase = false; 
+    if(confirm(promptText.uppercase)) pwdParameters.uppercase = true; else pwdParameters.uppercase = false;
+    if(confirm(promptText.numeric)) pwdParameters.numeric = true; else pwdParameters.numeric = false;
+    if(confirm(promptText.specialChar)) pwdParameters.specialChar = true; else pwdParameters.specialChar = false;
+  
+    if(!pwdParameters.lowercase && !pwdParameters.uppercase &&
+       !pwdParameters.numeric && !pwdParameters.specialChar) {
+        if(confirm(promptText.atLeastOneType)) {
+          getPasswordParameters();
+        } else return false;
+      };
+      return true;
+  };
+
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
